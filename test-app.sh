@@ -185,14 +185,14 @@ EOF
   npm run test:unit
 elif [ $framework == "ionic" ] || [ $framework == "i" ]
 then
-  ionic start ionic-app tabs --type angular --no-interactive
+  ionic start ionic-app tabs --type angular-standalone --no-interactive
   cd ionic-app
   npm install -D ../../oktadev*.tgz
   schematics @oktadev/schematics:add-auth --issuer=$issuer --client-id=$clientId
   npm run build && ng test --watch=false
 elif [ $framework == "ionic-auth0" ] || [ $framework == "i0" ]
 then
-  ionic start ionic-auth0 tabs --type angular --no-interactive
+  ionic start ionic-auth0 tabs --type angular-standalone --no-interactive
   cd ionic-auth0
   npm install -D ../../oktadev*.tgz
   schematics @oktadev/schematics:add-auth --issuer=$auth0Issuer --client-id=$auth0ClientId --auth0

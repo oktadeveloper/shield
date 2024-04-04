@@ -1,6 +1,8 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthActions, AuthService, Browser, IAuthAction } from 'ionic-appauth';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonIcon, IonItem, IonListHeader, IonList, IonCardContent, IonCardHeader, IonCardTitle, IonCard, IonButton, IonImg } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -8,8 +10,10 @@ const { audience } = environment;
 
 @Component({
   selector: 'app-tab1',
+  standalone: true,
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonLabel, IonIcon, IonItem, IonListHeader, IonList, IonCardContent, IonCardHeader, IonCardTitle, IonCard, IonButton, IonImg, JsonPipe],
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrl: 'tab1.page.scss'
 })
 export class Tab1Page implements OnInit, OnDestroy {
   user$ = this.auth.user$;

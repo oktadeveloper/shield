@@ -10,30 +10,6 @@ const defaultOptions: any = {
   clientId: '0oaifymbuodpH8nAi0h7'
 };
 
-const defaultAppModule: string = `import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule, AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule {}`;
-
 describe('OktaDev Schematics: Ionic/Angular', () => {
   it('requires required issuer option', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
@@ -46,7 +22,6 @@ describe('OktaDev Schematics: Ionic/Angular', () => {
     const tree = new UnitTestTree(new HostTree);
 
     tree.create('/package.json', JSON.stringify(packageJson));
-    tree.create('/src/app/app.module.ts', defaultAppModule);
 
     const testOptions: any = {...defaultOptions};
     testOptions.platform = 'capacitor';
@@ -59,7 +34,6 @@ describe('OktaDev Schematics: Ionic/Angular', () => {
       '/package.json',
       '/src/app/app.component.spec.ts',
       '/src/app/app.component.ts',
-      '/src/app/app.module.ts',
       '/src/app/app.routes.ts',
       '/src/app/auth/auth-callback/auth-callback.module.ts',
       '/src/app/auth/auth-callback/auth-callback.page.ts',
@@ -85,12 +59,14 @@ describe('OktaDev Schematics: Ionic/Angular', () => {
       '/src/app/tab1/tab1.page.spec.ts',
       '/src/app/tab1/tab1.page.ts',
       '/src/environments/environment.prod.ts',
-      '/src/environments/environment.ts' ]);
+      '/src/environments/environment.ts',
+      '/src/main.ts'
+    ]);
 
-    const appModule = tree.readContent('/src/app/app.module.ts');
+    const appModule = tree.readContent('/src/app/auth/auth.module.ts');
 
     expect(appModule).toMatch(/AuthModule/);
-    expect(appModule).toMatch(/HttpClientModule/);
+    expect(appModule).toMatch(/HttpClient/);
 
     const env = tree.readContent('/src/environments/environment.ts');
     expect(env).toContain(`client_id: '${defaultOptions.clientId}'`);
@@ -108,7 +84,6 @@ describe('OktaDev Schematics: Ionic/Angular', () => {
     const tree = new UnitTestTree(new HostTree);
 
     tree.create('/package.json', JSON.stringify(packageJson));
-    tree.create('/src/app/app.module.ts', defaultAppModule);
 
     const testOptions: any = {...defaultOptions};
     testOptions.issuer = 'https://dev-06bzs1cu.us.auth0.com/';
@@ -129,7 +104,6 @@ describe('OktaDev Schematics: Ionic/Angular', () => {
     const tree = new UnitTestTree(new HostTree);
 
     tree.create('/package.json', JSON.stringify(packageJson));
-    tree.create('/src/app/app.module.ts', defaultAppModule);
 
     const runner = new SchematicTestRunner('schematics', collectionPath);
     await runner.runSchematic('add-auth', defaultOptions, tree);

@@ -264,7 +264,7 @@ Create a new Ionic + Angular project with Ionic CLI. You **must** use the `tabs`
 
 ```
 npm install -g @ionic/cli
-ionic start secure-ionic tabs --type=angular --no-interactive 
+ionic start secure-ionic tabs --type=angular-standalone --no-interactive 
 cd secure-ionic
 ```
 
