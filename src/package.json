@@ -10,7 +10,7 @@
     "@capacitor/browser": "5.2.0",
     "@capacitor/preferences": "5.0.6",
     "@capacitor/splash-screen": "5.0.6",
-    "@okta/oidc-middleware": "5.2.0",
+    "@okta/oidc-middleware": "5.4.0",
     "@okta/okta-angular": "6.3.0",
     "@okta/okta-auth-js": "7.5.0",
     "@okta/okta-react": "6.7.0",
